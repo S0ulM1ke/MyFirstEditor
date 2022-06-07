@@ -1,5 +1,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include "imagesaver.h"
 
 
 int main(int argc, char *argv[])
@@ -14,6 +15,9 @@ int main(int argc, char *argv[])
     app.setApplicationName("Image Editor");
 
     QQmlApplicationEngine engine;
+
+    qmlRegisterType<ImageSaver>("ImageSaver" , 1, 0, "ImageSaver");
+
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {

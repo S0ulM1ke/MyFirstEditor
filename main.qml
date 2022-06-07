@@ -4,6 +4,7 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 import QtGraphicalEffects 1.15
 import QtQuick.Dialogs 1.3
+import ImageSaver 1.0
 
 Window {
     width: 640
@@ -28,7 +29,7 @@ Window {
                 id: primaryProcessing
                 anchors.fill: parent
                 source: rootImage
-                visible: true
+                visible: false
                 Component.onCompleted: {
                     hue = Qt.binding(function() {return repeater.itemAt(0).value / 100})
                     saturation = Qt.binding(function() {return repeater.itemAt(1).value / 100})
@@ -129,6 +130,10 @@ Window {
         }
     }
 
+    ImageSaver {
+        id: saveImageOnUrl
+    }
+
     FileDialog {
         //Upload Image
         id: openDialog
@@ -140,18 +145,18 @@ Window {
     }
 
     FileDialog {
-        //This should save result iamge
+        //Save image on cpp function
         id: saveDialog
         folder: shortcuts.pictures
         selectExisting: false
-        defaultSuffix: "untitled" //thats not even work
+        defaultSuffix: "untitled" //thats dosen't even work
         nameFilters: [ "JPG (*.jpg)", "PNG (*.png)" ]
         onAccepted: {
-            console.log(fileUrl) //We can get url of new image file, or file that already existing
             secondaryProcessing.grabToImage(function(result){
-            result.saveToFile(fileUrl);
-            console.log(result.saveToFile(fileUrl)) //this returns false at this moment
+            saveImageOnUrl.saveImage(result.image, fileUrl);
             })
+
+
         }
     }
 }

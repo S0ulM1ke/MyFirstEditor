@@ -2,6 +2,8 @@
 #define IMAGESAVER_H
 
 #include <QObject>
+#include <QVariant>
+#include <QUrl>
 
 class ImageSaver : public QObject
 {
@@ -10,10 +12,6 @@ public:
     explicit ImageSaver(QObject *parent = nullptr);
 
     Q_INVOKABLE void saveImage(QVariant var, QUrl url);
-
-
-signals:
-
 };
 
 #endif // IMAGESAVER_H

@@ -10,8 +10,8 @@ int main(int argc, char *argv[])
 #endif
     QGuiApplication app(argc, argv);
 
-    app.setOrganizationName("Organization");
-    app.setOrganizationDomain("Domain");
+    app.setOrganizationName("Horse Forge");
+    app.setOrganizationDomain("None");
     app.setApplicationName("Image Editor");
 
     QQmlApplicationEngine engine;
